@@ -1,0 +1,21 @@
+
+logging:
+  pattern:
+    console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(---){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+
+spring:
+  main:
+    banner-mode: OFF
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+  r2dbc:
+    url: ${DB_URL:r2dbc:mysql://svc-034eb066-0a94-4be5-ac87-cd30f2986a3c-dml.azr-virginia1-2.svc.singlestore.com/CLIENTES_CONSIST_POC_DB}
+    username: ${DB_USER:apppoc01user}
+    password: ${DB_PASSWORD:consistpoc}
+    properties:
+      ssl: false
+
+server:
+  port: 9061

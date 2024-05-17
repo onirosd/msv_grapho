@@ -1,0 +1,95 @@
+extend schema
+@link(url: "https://specs.apollo.dev/federation/v2.3",
+    import: ["@key","@extends","@external"])
+
+scalar Date
+scalar NonNegativeInt
+scalar DateTime
+
+type Dbc{
+    personId: ID,
+    customerType: CustomerType,
+    fatherLastName: String,
+    economicActivity: EconomicActivity,
+    bussinesOfficer: BussinesOfficer,
+    agency: Agency,
+    internalInformation: InternalInformation,
+    dcp: Dcp,
+    dce: Dce
+
+
+}
+type Gender{
+    code: String
+}
+type InternalInformation{
+    bankRelationship: BankRelationship
+}
+type BankRelationship{
+    code: String
+}
+type Agency{
+    code: String
+}
+type BussinesOfficer{
+    employedId: String
+}
+type EconomicActivity{
+     primary: EconomicActivityType,
+     secondary:EconomicActivityType,
+}
+type EconomicActivityType{
+    code: String
+}
+type CustomerType{
+    code: String
+}
+type Dcp{
+    personId: ID,
+    gender: Gender,
+    demographicInformation:DemographicInformation,
+    nationality:Nationality,
+    maritalStatus:MaritalStatus
+
+}
+type MaritalStatus{
+    code: String
+}
+type Nationality{
+    code: String
+}
+type DemographicInformation{
+    birthDate: String,
+    birthPlace: BirthPlace,
+}
+type BirthPlace{
+    code: String
+}
+
+type Dce{
+    personId:ID,
+    debtorCategory:DebtorCategory
+}
+
+type DebtorCategory{
+    code : String
+}
+
+"Movimientos de una cuenta"
+type Transaction{
+    "Id del movimiento"
+    id: ID,
+    "Fecha y hora de transacción"
+    fecha: DateTime!,
+    "Monto del movimiento"
+    amount: Float!,
+}
+
+type Query{
+
+    dbc(id:ID): Dbc
+}
+
+input AccountsByCustomerFilter {
+    customerId: ID
+}
